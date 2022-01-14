@@ -3,7 +3,7 @@ function readCookie() {
 }
 
 function setCookie() {
-    document.cookie = 'test-other-script'
+    document.cookie = 'Message=test-other-script;Domain=https://cdn.jsdelivr.net'
 }
 
 readCookie()
