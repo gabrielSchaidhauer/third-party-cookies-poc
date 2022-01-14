@@ -3,29 +3,37 @@
 
 <head>
     <script>
+
+        function setCookie() {
+            document.cookie = 'test-other'
+        }
+
         function requestAccess() {
-            document.hasStorageAccess().then(hasAccess => {
-                if (hasAccess) {
-                    console.log('has access')
-                    document.cookie = 'test; SameSite=None; Secure'
-                } else {
-                    console.log('has not access')
-                    document.requestStorageAccess().then(
-                        () => { console.log('access granted'); console.log(document.cookies) },
-                        () => { console.log('access denied') }
-                    );
-                }
-            });
+            if (document.hasStorageAccess === 'Function') {
+                document.hasStorageAccess().then(hasAccess => {
+                    if (hasAccess) {
+                        console.log('has access')
+                        setCookie()
+                    } else {
+                        console.log('has not access')
+                        document.requestStorageAccess().then(
+                            () => { console.log('access granted'); setCookie();},
+                            () => { console.log('access denied') }
+                        );
+                    }
+                });
+            } else {
+                setCookie()
+            }
+
+            document.querySelector('#cookies').innerHTML = document.cookie
         }
     </script>
 </head>
 
 <body>
     Other <span id="cookies"></span>
-    <button onclick="requestAccess()">allow</button>
-    <script>
-        document.querySelector('#cookies').innerHTML = document.cookie
-    </script>
+    <button onclick="requestAccess()">Set Cookie</button>
 </body>
 
 </html>
