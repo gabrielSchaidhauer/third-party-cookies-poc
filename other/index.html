@@ -8,6 +8,10 @@
             document.cookie = 'test-other; SameSite=None; Secure'
         }
 
+        function loadCookieValue() {
+            document.querySelector('#cookies').innerHTML = document.cookie
+        }
+
         function requestAccess() {
             if (document.hasStorageAccess === 'Function') {
                 document.hasStorageAccess().then(hasAccess => {
@@ -17,7 +21,7 @@
                     } else {
                         console.log('has not access')
                         document.requestStorageAccess().then(
-                            () => { console.log('access granted'); setCookie();},
+                            () => { console.log('access granted'); setCookie(); },
                             () => { console.log('access denied') }
                         );
                     }
@@ -26,7 +30,7 @@
                 setCookie()
             }
 
-            document.querySelector('#cookies').innerHTML = document.cookie
+            loadCookieValue()
         }
     </script>
 </head>
@@ -34,6 +38,8 @@
 <body>
     Other <span id="cookies"></span>
     <button onclick="requestAccess()">Set Cookie</button>
+    <script>
+        loadCookieValue()
+    </script>
 </body>
-
 </html>
