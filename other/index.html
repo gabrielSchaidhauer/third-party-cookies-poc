@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        function requestAccess() {
+            document.hasStorageAccess().then(hasAccess => {
+                if (hasAccess) {
+                    console.log('has access')
+                    document.cookie = 'test; SameSite=None; Secure'
+                } else {
+                    console.log('has not access')
+                    document.requestStorageAccess().then(
+                        () => { console.log('access granted'); console.log(document.cookies) },
+                        () => { console.log('access denied') }
+                    );
+                }
+            });
+        }
+    </script>
+</head>
+
+<body>
+    Other <span id="cookies"></span>
+    <button onclick="requestAccess()">allow</button>
+    <script>
+        document.querySelector('#cookies').innerHTML = document.cookie
+    </script>
+</body>
+
+</html>

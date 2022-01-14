@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    Main <span id="cookies"></span>
+    <script>
+        document.querySelector('#cookies').innerHTML = document.cookie
+        document.cookie = 'main-test'
+    </script>
+
+    <script src="http://10.2.0.84:8081/other-script.js"></script>
+</body>
+</html>
